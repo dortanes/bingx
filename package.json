@@ -1,0 +1,52 @@
+{
+  "name": "bingx",
+  "version": "1.0.0",
+  "description": "An app for interacting with Bing Chat right from macOS",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build:dir": "electron-builder --dir",
+    "build": "electron-builder",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "repository": "https://github.com/dortanes/bingx",
+  "keywords": [
+    "Bing",
+    "Chat",
+    "ChatGPT",
+    "AI"
+  ],
+  "author": {
+    "name": "dortanes",
+    "url": "https://github.com/dortanes"
+  },
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "electron": "^27.0.3",
+    "electron-builder": "^24.6.4"
+  },
+  "dependencies": {
+    "electron-traywindow-positioner": "^1.2.0",
+    "random-useragent": "^0.5.0"
+  },
+  "build": {
+    "appId": "com.dortanes.bingx",
+    "productName": "BingX",
+    "copyright": "Bing Chat is a trademark of Microsoft. I am not affiliated with Microsoft.",
+    "directories":{
+      "buildResources":"resources",
+      "output":"release"
+    },
+    "files": ["resources/**/*", "main.js", "preload.js"],
+    "mac": {
+      "category": "public.app-category.social-networking",
+      "target": "dmg"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
+  }
+}
