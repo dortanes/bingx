@@ -1,6 +1,6 @@
 {
   "name": "bingx",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An app for interacting with Bing Chat right from macOS",
   "main": "main.js",
   "scripts": {
@@ -38,15 +38,33 @@
       "output":"release"
     },
     "files": ["resources/**/*", "main.js", "preload.js"],
+    "asarUnpack": ["resources/**"],
     "mac": {
+      "entitlementsInherit": "resources/entitlements.mac.plist",
       "category": "public.app-category.social-networking",
-      "target": "dmg"
+      "target": [
+        {
+          "target": "dmg",
+          "arch": "universal"
+        }
+      ],
+      "extendInfo": {
+        "NSCameraUsageDescription": "Application requests access to the device's camera.",
+        "NSMicrophoneUsageDescription": "Application requests access to the device's microphone.",
+        "NSDocumentsFolderUsageDescription": "Application requests access to the user's Documents folder.",
+        "NSDownloadsFolderUsageDescription": "Application requests access to the user's Downloads folder."
+      },
+      "notarize": false
+    },
+    "dmg": {
+      "artifactName": "${productName}-macOS-${arch}-${version}.${ext}"
     },
     "win": {
       "target": "nsis"
     },
     "linux": {
-      "target": "AppImage"
+      "target": "AppImage",
+      "category": "Network"
     }
   }
 }
